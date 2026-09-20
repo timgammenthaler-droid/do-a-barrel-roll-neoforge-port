@@ -6,7 +6,7 @@ plugins {
     id("dev.architectury.loom") version "1.17.493" apply false
     id("me.modmuss50.mod-publish-plugin") version "0.5.+" apply false
 }
-stonecutter active "1.21.4-neoforge" /* [SC] DO NOT EDIT */
+stonecutter active "1.21.11-neoforge" /* [SC] DO NOT EDIT */
 
 stonecutter registerChiseled tasks.register("chiseledBuildAndCollect", stonecutter.chiseled) {
     group = "project"
