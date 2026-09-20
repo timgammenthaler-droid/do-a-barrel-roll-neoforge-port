@@ -20,9 +20,11 @@ public class DoABarrelRollInitializer implements ModInitializer, ClientModInitia
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import nl.enjarai.doabarrelroll.net.ClientNetworking;
 import nl.enjarai.doabarrelroll.net.ServerNetworking;
+import nl.enjarai.doabarrelroll.render.RenderHelper;
 
 @Mod(DoABarrelRoll.MODID)
 public class DoABarrelRollInitializer {
@@ -33,17 +35,21 @@ public class DoABarrelRollInitializer {
         modBus.addListener((RegisterPayloadHandlersEvent event) -> {
             var registrar = event.registrar(DoABarrelRoll.MODID);
             ServerNetworking.registerPayloads(registrar);
-            if (FMLLoader.getDist().isClient()) {
+            if (FMLLoader.getCurrent().getDist().isClient()) {
                 ClientNetworking.registerClientPayloads(registrar);
             }
         });
 
-        if (FMLLoader.getDist().isClient()) {
+        if (FMLLoader.getCurrent().getDist().isClient()) {
             DoABarrelRollClient.init();
 
             // Register keybindings on the mod bus
             modBus.addListener((RegisterKeyMappingsEvent event) ->
                     ModKeybindings.ALL.forEach(event::register));
+
+            // Register render pipelines on the mod bus
+            modBus.addListener((RegisterRenderPipelinesEvent event) ->
+                    event.registerPipeline(RenderHelper.INVERTED));
         }
     }
 }

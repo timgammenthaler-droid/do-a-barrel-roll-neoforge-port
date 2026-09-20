@@ -42,7 +42,7 @@ public class YACLImplementation {
         var inWorld = MinecraftClient.getInstance().world != null;
         ClientPlayerEntity player;
         var onRealms = DoABarrelRollClient.isConnectedToRealms() &&
-                (player = MinecraftClient.getInstance().player) != null && player.hasPermissionLevel(2);
+                (player = MinecraftClient.getInstance().player) != null && player.isCreativeLevelTwoOp();
         var serverConfig = ClientNetworking.HANDSHAKE_CLIENT.getConfig();
 
         var thrustingAllowed = new Dependable(serverConfig.map(LimitedModConfigServer::allowThrusting).orElse(!inWorld || onRealms));

@@ -4,8 +4,8 @@ package nl.enjarai.doabarrelroll.net;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 //?} else {
-/*import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.network.PacketDistributor;
+/*import net.neoforged.neoforge.client.network.ClientPacketDistributor;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 *///?}
 import net.minecraft.client.MinecraftClient;
@@ -61,7 +61,7 @@ public class ClientNetworking {
                 ConfigSyncS2CPacket.PACKET_ID, ConfigSyncS2CPacket.PACKET_CODEC,
                 (payload, context) -> {
                     var response = HANDSHAKE_CLIENT.handleConfigSync(payload);
-                    PacketDistributor.sendToServer(response);
+                    ClientPacketDistributor.sendToServer(response);
                 }
         );
         registrar.playToClient(
@@ -90,7 +90,7 @@ public class ClientNetworking {
             //? if fabric {
             ClientPlayNetworking.send(new RollSyncC2SPacket(rolling, roll));
             //?} else {
-            /*PacketDistributor.sendToServer(new RollSyncC2SPacket(rolling, roll));
+            /*ClientPacketDistributor.sendToServer(new RollSyncC2SPacket(rolling, roll));
             *///?}
         }
     }
@@ -99,7 +99,7 @@ public class ClientNetworking {
         //? if fabric {
         ClientPlayNetworking.send(CONFIG_UPDATE_CLIENT.prepUpdatePacket(config));
         //?} else {
-        /*PacketDistributor.sendToServer(CONFIG_UPDATE_CLIENT.prepUpdatePacket(config));
+        /*ClientPacketDistributor.sendToServer(CONFIG_UPDATE_CLIENT.prepUpdatePacket(config));
         *///?}
     }
 }

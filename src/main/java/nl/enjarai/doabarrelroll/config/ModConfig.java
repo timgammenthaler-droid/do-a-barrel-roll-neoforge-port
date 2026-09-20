@@ -175,7 +175,7 @@ public class ModConfig {
         if (general.thrust.enable_thrust) {
             ClientPlayerEntity player;
             if (DoABarrelRollClient.isConnectedToRealms() &&
-                    (player = MinecraftClient.getInstance().player) != null && player.hasPermissionLevel(2)) {
+                    (player = MinecraftClient.getInstance().player) != null && player.isCreativeLevelTwoOp()) {
                 return true;
             }
 

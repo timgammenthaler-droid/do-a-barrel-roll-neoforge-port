@@ -145,11 +145,11 @@ public class ServerNetworking {
                 .filter(player -> HANDSHAKE_SERVER.getHandshakeState(player).state == HandshakeServer.HandshakeState.ACCEPTED)
                 .forEach(player -> ServerPlayNetworking.send(player, payload));
         //?} else {
-        /*entity.getWorld().getPlayers().stream()
+        /*entity.getEntityWorld().getPlayers().stream()
                 .filter(player -> player != entity)
                 .filter(player -> player instanceof ServerPlayerEntity)
                 .map(player -> (ServerPlayerEntity) player)
-                .filter(player -> player.getPos().isInRange(entity.getPos(), 128))
+                .filter(player -> player.getEntityPos().isInRange(entity.getEntityPos(), 128))
                 .filter(player -> HANDSHAKE_SERVER.getHandshakeState(player).state == HandshakeServer.HandshakeState.ACCEPTED)
                 .forEach(player -> PacketDistributor.sendToPlayer(player, payload));
         *///?}

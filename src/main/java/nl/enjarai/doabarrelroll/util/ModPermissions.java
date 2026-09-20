@@ -33,14 +33,15 @@ public class ModPermissions {
                 PermissionAPI.getPermission(player, node, DEFAULT_PERMISSION_LEVEL_CONTEXT.createContext(defaultPermissionLevel));
             }
         }
-        return player.hasPermissionLevel(defaultPermissionLevel);
+        return defaultPermissionLevel <= 2 ? player.isCreativeLevelTwoOp() : player.getEntityWorld().getServer().getPlayerManager().isOperator(player.getGameProfile());
     }
 
     private static boolean defaultResolve(@Nullable ServerPlayerEntity player, UUID playerUUID, PermissionDynamicContext<?>... context) {
         if (player != null) {
             for (var key : context) {
                 if (key.getDynamic() == DEFAULT_PERMISSION_LEVEL_CONTEXT) {
-                    return player.hasPermissionLevel((int) key.getValue());
+                    int level = (int) key.getValue();
+                    return level <= 2 ? player.isCreativeLevelTwoOp() : player.getEntityWorld().getServer().getPlayerManager().isOperator(player.getGameProfile());
                 }
             }
         }
