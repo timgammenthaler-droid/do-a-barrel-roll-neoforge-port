@@ -40,6 +40,7 @@ repositories {
     maven("https://maven.bawnorton.com/releases/")
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://maven.su5ed.dev/releases")
+    maven("https://maven.isxander.dev/releases")
 }
 
 dependencies {
