@@ -34,9 +34,3 @@ extensions.configure<StonecutterSettings> {
     create(rootProject)
 }
 rootProject.name = "Do a Barrel Roll"
-
-include("extensions")
-val ext = project(":extensions")
-listOf("common", "fabric", "forge", "neoforge").forEach {
-    include("extensions:$it")
-}
