@@ -1,0 +1,47 @@
+name: Build NeoForge 1.21.11
+
+on:
+  push:
+    branches: ["neoforge/1.21.11"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: gradle
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build 1.21.11-neoforge
+        run: ./gradlew :1.21.11-neoforge:build -x test
+        env:
+          GRADLE_OPTS: "-Xmx4g"
+
+      - name: Collect JAR
+        run: |
+          mkdir -p artifacts
+          find . -path ./artifacts -prune -o -path "*/build/libs/*.jar" -print \
+            | grep -v -- '-sources.jar' \
+            | grep -v -- '-dev.jar' \
+            | xargs -I{} cp {} artifacts/
+          echo "Found jars:"
+          find . -path ./artifacts -prune -o -name "*.jar" -path "*build/libs*" -print
+          echo "Collected artifacts:"
+          ls -lh artifacts/
+
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: do-a-barrel-roll-neoforge-1.21.11
+          path: artifacts/*.jar
+          retention-days: 30
