@@ -132,7 +132,7 @@ loom {
     @Suppress("UnstableApiUsage")
     mixin {
         useLegacyMixinAp = false
-//        defaultRefmapName = "do_a_barrel_roll.refmap.json"
+        defaultRefmapName = "do_a_barrel_roll.refmap.json"
     }
 }
 
