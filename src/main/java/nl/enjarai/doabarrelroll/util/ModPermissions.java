@@ -33,7 +33,7 @@ public class ModPermissions {
                 PermissionAPI.getPermission(player, node, DEFAULT_PERMISSION_LEVEL_CONTEXT.createContext(defaultPermissionLevel));
             }
         }
-        return defaultPermissionLevel <= 2 ? player.isCreativeLevelTwoOp() : player.getEntityWorld().getServer().getPlayerManager().isOperator(player.getGameProfile());
+        return defaultPermissionLevel <= 2 ? player.isCreativeLevelTwoOp() : player.getEntityWorld().getServer().getPlayerManager().isOperator(new net.minecraft.server.PlayerConfigEntry(player.getGameProfile()));
     }
 
     private static boolean defaultResolve(@Nullable ServerPlayerEntity player, UUID playerUUID, PermissionDynamicContext<?>... context) {
@@ -41,7 +41,7 @@ public class ModPermissions {
             for (var key : context) {
                 if (key.getDynamic() == DEFAULT_PERMISSION_LEVEL_CONTEXT) {
                     int level = (int) key.getValue();
-                    return level <= 2 ? player.isCreativeLevelTwoOp() : player.getEntityWorld().getServer().getPlayerManager().isOperator(player.getGameProfile());
+                    return level <= 2 ? player.isCreativeLevelTwoOp() : player.getEntityWorld().getServer().getPlayerManager().isOperator(new net.minecraft.server.PlayerConfigEntry(player.getGameProfile()));
                 }
             }
         }

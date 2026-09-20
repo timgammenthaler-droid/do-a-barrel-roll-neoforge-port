@@ -34,7 +34,7 @@ public class StarFoxUtil {
     public static void register() {
 //        Registry.register(Registries.SOUND_EVENT, barrelRollSoundId, barrelRollSound);
 
-        StarFox64Events.DOES_A_BARREL_ROLL.register(StarFoxUtil::playBarrelRollSound);
+        StarFox64Events.DOES_A_BARREL_ROLL.register(player -> playBarrelRollSound(player));
         StarFox64Events.DOES_A_BARREL_ROLL.register(player -> barrelRollTimer = 30);
 
         RollEvents.LATE_CAMERA_MODIFIERS.register(context -> {
