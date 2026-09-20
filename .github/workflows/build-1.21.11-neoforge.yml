@@ -22,19 +22,19 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Build 1.21.11-neoforge
-        run: ./gradlew :1.21.11-neoforge:build -x test
+      - name: Build all Stonecutter versions (chiseled)
+        run: ./gradlew chiseledBuildAndCollect -x test
         env:
           GRADLE_OPTS: "-Xmx4g"
 
-      - name: Collect JAR
+      - name: Collect 1.21.11-neoforge JAR
         run: |
           mkdir -p artifacts
-          find . -path ./artifacts -prune -o -path "*/build/libs/*.jar" -print \
+          find . -path ./artifacts -prune -o -path "*1.21.11-neoforge*build/libs/*.jar" -print \
             | grep -v -- '-sources.jar' \
             | grep -v -- '-dev.jar' \
             | xargs -I{} cp {} artifacts/
-          echo "Found jars:"
+          echo "All jars found anywhere:"
           find . -path ./artifacts -prune -o -name "*.jar" -path "*build/libs*" -print
           echo "Collected artifacts:"
           ls -lh artifacts/
