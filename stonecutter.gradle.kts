@@ -3,7 +3,7 @@ plugins {
     kotlin("jvm") version "2.0.0" apply false
     kotlin("plugin.serialization") version "2.0.0" apply false
     id("co.uzzu.dotenv.gradle") version "4.0.0"
-    id("dev.architectury.loom") version "1.11.454" apply false
+    id("dev.architectury.loom") version "1.17.493" apply false
     id("me.modmuss50.mod-publish-plugin") version "0.5.+" apply false
 }
 stonecutter active "1.21.4-neoforge" /* [SC] DO NOT EDIT */
